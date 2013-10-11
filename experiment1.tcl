@@ -48,6 +48,11 @@ $ns duplex-link-op $n2 $n5 orient right-down
 #Monitor the queue for link (N2-N3). (for NAM)
 $ns duplex-link-op $n2 $n3 queuePos 0.5
 
+
+################################################
+#       Setup a Constant Bit Rate flow         #
+################################################
+
 # Setup N2
 set udp0 [new Agent/UDP]
 $ns attach-agent $n1 $udp0
@@ -67,20 +72,45 @@ $ns attach-agent $n2 $null0
 $ns connect $udp0 $null0
 $udp0 set fid_ 2
 
-#Schedule events for the CBR and FTP agents
+################################################
+#          Setup the TCP connection            #
+################################################
+
+if (1) {
+#Setup a TCP connection
+set tcp0 [new Agent/TCP]
+$tcp0 set class_ 2
+$ns attach-agent $n0 $tcp0
+set sink0 [new Agent/TCPSink]
+$ns attach-agent $n3 $sink0
+$ns connect $tcp0 $sink0
+$tcp0 set fid_ 1
+
+#Setup a FTP over TCP connection
+set ftp0 [new Application/FTP]
+$ftp0 attach-agent $tcp0
+$ftp0 set type_ FTP
+}
+
+################################################
+#                 Setup events                 #
+################################################
+
+#Schedule events for the CBR and TCP agents
 $ns at 0.0 "$cbr0 start"
+$ns at 0.1 "$ftp0 start"
+$ns at 4.8 "$ftp0 stop"
 $ns at 4.9 "$cbr0 stop"
 
 #Detach tcp and sink agents (not really necessary)
-# $ns at 5.0 "$ns detach-agent $n0 $tcp ; $ns detach-agent $n3 $sink"
+# $ns at 5.0 "$ns detach-agent $n0 $tcp0 ; $ns detach-agent $n3 $sink0"
 
 #Call the finish procedure after 5 seconds of simulation time
-$ns at 5.1 "finish"
+$ns at 5.0 "finish"
 
 #Print CBR packet size and interval
 puts "CBR packet size = [$cbr0 set packet_size_]"
 puts "CBR interval = [$cbr0 set interval_]"
-$ns at 5.1 "finish"
 
 #Run the simulation
 $ns run
