@@ -29,21 +29,23 @@ set n4 [$ns node]
 set n5 [$ns node]
 
 #Create links between the nodes
-$ns duplex-link $n0 $n1 10Mb 0ms DropTail
-$ns duplex-link $n1 $n2 10Mb 0ms DropTail
-$ns duplex-link $n2 $n3 10Mb 0ms DropTail
-$ns duplex-link $n4 $n1 10Mb 0ms DropTail
-$ns duplex-link $n5 $n2 10Mb 0ms DropTail
+$ns duplex-link $n0 $n1 10Mb 10ms DropTail
+$ns duplex-link $n1 $n2 10Mb 10ms DropTail
+$ns duplex-link $n2 $n3 10Mb 10ms DropTail
+$ns duplex-link $n4 $n1 10Mb 10ms DropTail
+$ns duplex-link $n5 $n2 10Mb 10ms DropTail
 
 #Set Queue Size of link (n2-n3) to 10
 $ns queue-limit $n2 $n3 10
 
 #Give node position (for NAM)
-$ns duplex-link-op $n0 $n2 orient right-down
-$ns duplex-link-op $n1 $n2 orient right-up
-$ns duplex-link-op $n2 $n3 orient right
+$ns duplex-link-op $n0 $n1 orient right-down
+$ns duplex-link-op $n4 $n1 orient right-up
+$ns duplex-link-op $n1 $n2 orient right
+$ns duplex-link-op $n2 $n3 orient right-up
+$ns duplex-link-op $n2 $n5 orient right-down
 
-#Monitor the queue for link (n2-n3). (for NAM)
+#Monitor the queue for link (N2-N3). (for NAM)
 $ns duplex-link-op $n2 $n3 queuePos 0.5
 
 # Setup N2
@@ -66,18 +68,19 @@ $ns connect $udp0 $null0
 $udp0 set fid_ 2
 
 #Schedule events for the CBR and FTP agents
-$ns at 0.0 "$cbr start"
-$ns at 4.9 "$cbr stop"
+$ns at 0.0 "$cbr0 start"
+$ns at 4.9 "$cbr0 stop"
 
 #Detach tcp and sink agents (not really necessary)
-$ns at 5.0 "$ns detach-agent $n0 $tcp ; $ns detach-agent $n3 $sink"
+# $ns at 5.0 "$ns detach-agent $n0 $tcp ; $ns detach-agent $n3 $sink"
 
 #Call the finish procedure after 5 seconds of simulation time
 $ns at 5.1 "finish"
 
 #Print CBR packet size and interval
-puts "CBR packet size = [$cbr set packet_size_]"
-puts "CBR interval = [$cbr set interval_]"
+puts "CBR packet size = [$cbr0 set packet_size_]"
+puts "CBR interval = [$cbr0 set interval_]"
+$ns at 5.1 "finish"
 
 #Run the simulation
 $ns run
