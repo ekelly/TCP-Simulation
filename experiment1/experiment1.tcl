@@ -1,13 +1,15 @@
+set udprate 1mb
+
+#Open the NAM trace file
+set nf [open out.nam w]
+
 #Create a simulator object
 set ns [new Simulator]
+$ns namtrace-all $nf
 
 #Define different colors for data flows (for NAM)
 $ns color 1 Blue
 $ns color 2 Red
-
-#Open the NAM trace file
-set nf [open out.nam w]
-$ns namtrace-all $nf
 
 #Define a 'finish' procedure
 proc finish {} {
@@ -61,7 +63,7 @@ set cbr0 [new Application/Traffic/CBR]
 $cbr0 attach-agent $udp0
 $cbr0 set type_ CBR
 $cbr0 set packet_size_ 1000
-$cbr0 set rate_ 1mb
+$cbr0 set rate_ $udprate
 $cbr0 set random_ false
 
 # Setup N3
