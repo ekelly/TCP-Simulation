@@ -1,7 +1,8 @@
+
 set udprate 1mb
 
 #Open the NAM trace file
-set nf [open out.nam w]
+set nf [open out-1.nam w]
 
 #Create a simulator object
 set ns [new Simulator]

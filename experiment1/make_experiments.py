@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from optparse import OptionParser
+import shutil
 
 parser = OptionParser()
 parser.add_option("-s", "--start", dest="start", type="int",
@@ -22,6 +23,12 @@ set nf [open out-%(mb)s.nam w]
 
 if options.start and options.end and options.inc:
     for i in range(options.start, options.end, options.inc):
-        print settings % {"mb": i}
+        with open("experiment%s.tcl" % i, "a+") as experiment:
+            experiment.write(settings % {"mb": i})
+            with open("experiment.tcl") as template:
+                for line in template:
+                    experiment.write(line)
+                experiment.close()
+                template.close()
 else:
     parser.print_help()
