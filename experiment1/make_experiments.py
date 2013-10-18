@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from optparse import OptionParser
-import shutil
+import os
 
 parser = OptionParser()
 parser.add_option("-s", "--start", dest="start", type="int",
@@ -21,14 +21,21 @@ set nf [open out-%(mb)s.nam w]
 
 """
 
+experiments = []
+
 if options.start and options.end and options.inc:
-    for i in range(options.start, options.end, options.inc):
+    for i in range(options.start, options.end + options.inc, options.inc):
         with open("experiment%s.tcl" % i, "a+") as experiment:
             experiment.write(settings % {"mb": i})
-            with open("experiment.tcl") as template:
+            with open("template.tcl") as template:
                 for line in template:
                     experiment.write(line)
                 experiment.close()
                 template.close()
+            experiments.append("experiment%s.tcl" % i)
 else:
     parser.print_help()
+
+for experiment in experiments:
+    os.system("/course/cs4700f12/ns-allinone-2.35/bin/ns %s" % experiment)
+    os.remove(experiment)

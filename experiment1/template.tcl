@@ -1,9 +1,3 @@
-
-set udprate 1mb
-
-#Open the NAM trace file
-set nf [open out-1.nam w]
-
 #Create a simulator object
 set ns [new Simulator]
 $ns namtrace-all $nf
@@ -19,7 +13,7 @@ proc finish {} {
         #Close the NAM trace file
         close $nf
         #Execute NAM on the trace file
-        exec nam out.nam &
+        # exec nam out.nam &
         exit 0
 }
 
