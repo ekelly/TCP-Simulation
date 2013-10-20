@@ -1,7 +1,3 @@
-#Create a simulator object
-set ns [new Simulator]
-$ns namtrace-all $nf
-
 #Define different colors for data flows (for NAM)
 $ns color 1 Blue
 $ns color 2 Red
@@ -74,8 +70,6 @@ $udp0 set fid_ 2
 ################################################
 
 if (1) {
-#Setup a TCP connection
-set tcp0 [new Agent/TCP]
 $tcp0 set class_ 2
 $ns attach-agent $n0 $tcp0
 set sink0 [new Agent/TCPSink]

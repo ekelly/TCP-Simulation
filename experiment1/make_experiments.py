@@ -17,7 +17,14 @@ settings = """
 set udprate %(mb)smb
 
 #Open the NAM trace file
-set nf [open out-%(mb)s.nam w]
+set nf [open %(ttype)s-%(mb)s.nam w]
+
+#Create a simulator object
+set ns [new Simulator]
+$ns namtrace-all $nf
+
+#Setup a TCP connection
+set tcp0 [new Agent/%(tcp)s]
 
 """
 
@@ -25,14 +32,16 @@ experiments = []
 
 if options.start and options.end and options.inc:
     for i in range(options.start, options.end + options.inc, options.inc):
-        with open("experiment%s.tcl" % i, "a+") as experiment:
-            experiment.write(settings % {"mb": i})
-            with open("template.tcl") as template:
-                for line in template:
-                    experiment.write(line)
-                experiment.close()
-                template.close()
-            experiments.append("experiment%s.tcl" % i)
+        for tcptype in ["TCP", "TCP/Reno", "TCP/Newreno", "TCP/Vegas"]:
+            ttype = "tahoe" if tcptype.find("/") == -1 else tcptype.split("/")[1].lower()
+            with open("experiment%s-%s.tcl" % (i, ttype), "a+") as experiment:
+                experiment.write(settings % {"mb": i, "tcp": tcptype, "ttype": ttype})
+                with open("template.tcl") as template:
+                    for line in template:
+                        experiment.write(line)
+                    experiment.close()
+                    template.close()
+                experiments.append("experiment%s-%s.tcl" % (i, ttype))
 else:
     parser.print_help()
 
