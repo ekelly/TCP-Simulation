@@ -5,7 +5,7 @@ import os
 settings = """
 
 #Open the NAM trace file
-set nf [open %(ttype)s-%(qtype)s.nam w]
+set nf [open %(ttype)s-%(qtype)s.tr w]
 
 #Create a simulator object
 set ns [new Simulator]

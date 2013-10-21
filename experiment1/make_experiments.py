@@ -17,7 +17,7 @@ settings = """
 set udprate %(mb)smb
 
 #Open the NAM trace file
-set nf [open %(ttype)s-%(mb)s.nam w]
+set nf [open %(ttype)s-%(mb)s.tr w]
 
 #Create a simulator object
 set ns [new Simulator]

@@ -5,7 +5,7 @@ import os
 settings = """
 
 #Open the NAM trace file
-set nf [open %(tcp1)s-%(tcp2)s.nam w]
+set nf [open %(tcp1)s-%(tcp2)s.tr w]
 
 #Create a simulator object
 set ns [new Simulator]
