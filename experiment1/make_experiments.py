@@ -4,11 +4,11 @@ from optparse import OptionParser
 import os
 
 parser = OptionParser()
-parser.add_option("-s", "--start", dest="start", type="int",
+parser.add_option("-s", "--start", dest="start", type="int", default=1,
                           help="start at this mb/s for the UDP stream")
-parser.add_option("-e", "--end", dest="end", type="int",
+parser.add_option("-e", "--end", dest="end", type="int", default=5,
                           help="end at this mb/s for the UDP stream")
-parser.add_option("-i", "--increment", dest="inc", type="int",
+parser.add_option("-i", "--increment", dest="inc", type="int", default=1,
                           help="how fast do we increment the mb/s")
 
 (options, args) = parser.parse_args()
