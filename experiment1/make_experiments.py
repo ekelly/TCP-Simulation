@@ -21,7 +21,7 @@ set nf [open %(ttype)s-%(mb)s.nam w]
 
 #Create a simulator object
 set ns [new Simulator]
-$ns namtrace-all $nf
+$ns trace-all $nf
 
 #Setup a TCP connection
 set tcp0 [new Agent/%(tcp)s]

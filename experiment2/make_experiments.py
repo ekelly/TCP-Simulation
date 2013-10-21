@@ -9,7 +9,7 @@ set nf [open %(tcp1)s-%(tcp2)s.nam w]
 
 #Create a simulator object
 set ns [new Simulator]
-$ns namtrace-all $nf
+$ns trace-all $nf
 
 #Setup a TCP connection
 set tcp0 [new Agent/TCP/%(tcp1)s]
