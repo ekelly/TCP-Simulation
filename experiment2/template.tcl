@@ -108,11 +108,8 @@ $ftp1 set type_ FTP
 
 #Schedule events for the CBR and TCP agents
 $ns at 0.0 "$cbr0 start"
-$ns at 0.1 "$ftp0 start"
-$ns at 0.1 "$ftp1 start"
-$ns at 4.8 "$ftp1 stop"
-$ns at 4.8 "$ftp0 stop"
-$ns at 4.9 "$cbr0 stop"
+$ns at 0.0 "$ftp0 start"
+$ns at 0.0 "$ftp1 start"
 
 #Detach tcp and sink agents (not really necessary)
 # $ns at 5.0 "$ns detach-agent $n0 $tcp0 ; $ns detach-agent $n3 $sink0"
