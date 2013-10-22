@@ -90,6 +90,7 @@ set sink0 [new Agent/TCPSink]
 $ns attach-agent $n3 $sink0
 $ns connect $tcp0 $sink0
 $tcp0 set fid_ 1
+$tcp0 set window_ 10000
 
 #Setup a FTP over TCP connection
 set ftp0 [new Application/FTP]
@@ -107,6 +108,7 @@ set sink1 [new Agent/TCPSink]
 $ns attach-agent $n5 $sink1
 $ns connect $tcp1 $sink1
 $tcp1 set fid_ 3
+$tcp1 set window_ 10000
 
 #Setup a FTP over TCP connection
 set ftp1 [new Application/FTP]

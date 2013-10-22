@@ -1,5 +1,5 @@
 #Create a simulator object
-set udprate 5mb
+set udprate 0.5Mb
 
 #Open the NAM trace file
 set nf [open out.nam w]
@@ -34,14 +34,14 @@ set n4 [$ns node]
 set n5 [$ns node]
 
 #Create links between the nodes
-$ns duplex-link $n0 $n1 10Mb 10ms DropTail
-$ns duplex-link $n1 $n2 10Mb 10ms DropTail
-$ns duplex-link $n2 $n3 10Mb 10ms DropTail
-$ns duplex-link $n4 $n1 10Mb 10ms DropTail
-$ns duplex-link $n5 $n2 10Mb 10ms DropTail
+$ns duplex-link $n0 $n1 1Mb 1ms DropTail
+$ns duplex-link $n1 $n2 1Mb 1ms DropTail
+$ns duplex-link $n2 $n3 1Mb 1ms DropTail
+$ns duplex-link $n4 $n1 1Mb 1ms DropTail
+$ns duplex-link $n5 $n2 1Mb 1ms DropTail
 
 #Set Queue Size of link (n2-n3) to 10
-$ns queue-limit $n2 $n3 10
+#$ns queue-limit $n2 $n3 10
 
 #Give node position (for NAM)
 $ns duplex-link-op $n0 $n1 orient right-down
@@ -81,8 +81,6 @@ $udp0 set fid_ 2
 #          Setup the TCP connection            #
 ################################################
 
-if (1) {
-
 #Setup a TCP connection
 $tcp0 set class_ 2
 $ns attach-agent $n0 $tcp0
@@ -90,12 +88,12 @@ set sink0 [new Agent/TCPSink]
 $ns attach-agent $n3 $sink0
 $ns connect $tcp0 $sink0
 $tcp0 set fid_ 1
+$tcp0 set window_ 10000
 
 #Setup a FTP over TCP connection
 set ftp0 [new Application/FTP]
 $ftp0 attach-agent $tcp0
 $ftp0 set type_ FTP
-}
 
 ################################################
 #                 Setup events                 #
