@@ -94,7 +94,7 @@ $ns at 0.0 "$ftp0 start"
 # $ns at 5.0 "$ns detach-agent $n0 $tcp0 ; $ns detach-agent $n3 $sink0"
 
 #Call the finish procedure after 5 seconds of simulation time
-$ns at 5.0 "finish"
+$ns at 10.0 "finish"
 
 #Print CBR packet size and interval
 puts "CBR packet size = [$cbr0 set packet_size_]"
