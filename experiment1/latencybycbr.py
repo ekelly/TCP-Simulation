@@ -11,7 +11,7 @@ def main():
         # 0.1   102
         # ...   ...
         # write to tcp_variant-throughput.txt
-        for cbr in range(500,10500,500):
+        for cbr in range(0,10500,500):
             with open("%s-%s.tr" % (tcp_variant, cbr)) as in_file:
                 seq_map = dict()
                 sum_latency = 0
