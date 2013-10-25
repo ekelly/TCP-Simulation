@@ -12,11 +12,11 @@ def main():
         # 0.1   102
         # ...   ...
         # write to tcp_variant-throughput.txt
-        for cbr in range(100,1100,100):
+        for cbr in range(1000,11000,1000):
             with open("%s-%s.tr" % (tcp_variant, cbr)) as in_file:
                 for line in map(lambda line: line.split(" "), in_file):
-                    if len(line) and line[0] == 'r' and line[4] == 'tcp':
-                        cbrs[cbr][tcp_variant] += 1
+                    if len(line) and line[0] == 'r' and line[4] == 'tcp' and line[2] == '2' and line[3] == '3':
+                        cbrs[cbr][tcp_variant] += int(line[5])
 
     print 'cbr\t'+'\t'.join(sorted(cbrs.values()[0].keys()))
     for cbr,variants in sorted(cbrs.items(), key=lambda item: int(item[0])):

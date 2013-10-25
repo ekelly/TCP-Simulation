@@ -32,7 +32,7 @@ experiments = []
 
 if options.start and options.end and options.inc:
     for i in range(options.start, options.end + options.inc, options.inc):
-        i = i*100
+        i = i*1000
         for tcptype in ["TCP", "TCP/Reno", "TCP/Newreno", "TCP/Vegas"]:
             ttype = "tahoe" if tcptype.find("/") == -1 else tcptype.split("/")[1].lower()
             with open("experiment%s-%s.tcl" % (i, ttype), "a+") as experiment:
