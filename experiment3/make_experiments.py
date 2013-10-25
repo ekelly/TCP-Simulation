@@ -31,5 +31,7 @@ for tcptype in ["Reno", "Sack1"]:
             experiments.append(filename)
 
 for experiment in experiments:
-    os.system("/course/cs4700f12/ns-allinone-2.35/bin/ns %s" % experiment)
+    os.system("ns %s" % experiment)
     os.remove(experiment)
+
+print ""

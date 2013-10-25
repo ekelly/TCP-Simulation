@@ -90,18 +90,17 @@ $ftp0 set type_ FTP
 ################################################
 
 #Schedule events for the CBR and TCP agents
-$ns at 0.0 "$cbr0 start"
 $ns at 0.0 "$ftp0 start"
+$ns at 1.0 "$cbr0 start"
 
 #Detach tcp and sink agents (not really necessary)
 # $ns at 5.0 "$ns detach-agent $n0 $tcp0 ; $ns detach-agent $n3 $sink0"
 
 #Call the finish procedure after 5 seconds of simulation time
-$ns at 5.0 "finish"
+$ns at 10.0 "finish"
 
 #Print CBR packet size and interval
-puts "CBR packet size = [$cbr0 set packet_size_]"
-puts "CBR interval = [$cbr0 set interval_]"
+puts -nonewline "."
 
 #Run the simulation
 $ns run
