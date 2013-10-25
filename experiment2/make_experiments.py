@@ -6,7 +6,7 @@ settings = """
 set udprate %(cbr)i
 
 #Open the NAM trace file
-set nf [open %(tcp1)s-%(tcp2)s.%(cbr)i.tr w]
+set nf [open %(tcp1)s-%(tcp2)s-%(cbr)i.tr w]
 
 #Create a simulator object
 set ns [new Simulator]
