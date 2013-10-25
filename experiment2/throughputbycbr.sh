@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 ./make_experiments.py
 ./throughputbycbr.py Reno-Reno-* > Reno-Reno.txt
@@ -9,7 +9,12 @@ gnuplot -e "filename='Reno-Reno.txt'" throughputbycbr.plot
 gnuplot -e "filename='Reno-Newreno.txt'" throughputbycbr.plot
 gnuplot -e "filename='Vegas-Vegas.txt'" throughputbycbr.plot
 gnuplot -e "filename='Newreno-Vegas.txt'" throughputbycbr.plot
-cp Reno-Reno.txt.png /var/www/ficklingus/project3/
-cp Reno-Newreno.txt.png /var/www/ficklingus/project3/
-cp Vegas-Vegas.txt.png /var/www/ficklingus/project3/
-cp Newreno-Vegas.txt.png /var/www/ficklingus/project3/
+mv throughput-Reno-Reno.txt.png /var/www/ficklingus/project3/experiment2/
+mv throughput-Reno-Newreno.txt.png /var/www/ficklingus/project3/experiment2/
+mv throughput-Vegas-Vegas.txt.png /var/www/ficklingus/project3/experiment2/
+mv throughput-Newreno-Vegas.txt.png /var/www/ficklingus/project3/experiment2/
+rm Reno-Reno.txt
+rm Reno-Newreno.txt
+rm Vegas-Vegas.txt
+rm Newreno-Vegas.txt
+rm *.tr

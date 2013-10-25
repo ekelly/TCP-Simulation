@@ -1,6 +1,6 @@
 set style line 1 default
 set terminal png size 1000,400
-set output filename.".png"
+set output "throughput-".filename.".png"
 set xlabel "CBR interference (in kb/sec)"
 set ylabel "Throughput (in kb/sec)"
 #set xtics 1 font ",8"
