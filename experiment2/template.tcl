@@ -60,7 +60,7 @@ set cbr0 [new Application/Traffic/CBR]
 $cbr0 attach-agent $udp0
 $cbr0 set type_ CBR
 $cbr0 set packet_size_ 1000
-$cbr0 set rate_ $udprate
+$cbr0 set rate_ $rate
 $cbr0 set random_ false
 
 # Setup N3
