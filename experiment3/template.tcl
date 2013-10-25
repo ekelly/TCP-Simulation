@@ -25,11 +25,11 @@ set n4 [$ns node]
 set n5 [$ns node]
 
 #Create links between the nodes
-$ns duplex-link $n0 $n1 10Mb 10ms DropTail
-$ns duplex-link $n1 $n2 10Mb 10ms DropTail
-$ns duplex-link $n2 $n3 10Mb 10ms DropTail
-$ns duplex-link $n4 $n1 10Mb 10ms DropTail
-$ns duplex-link $n5 $n2 10Mb 10ms DropTail
+$ns duplex-link $n0 $n1 10Mb 10ms $queuetype
+$ns duplex-link $n1 $n2 10Mb 10ms $queuetype
+$ns duplex-link $n2 $n3 10Mb 10ms $queuetype
+$ns duplex-link $n4 $n1 10Mb 10ms $queuetype
+$ns duplex-link $n5 $n2 10Mb 10ms $queuetype
 
 #Set Queue Size of link (n2-n3) to 10
 $ns queue-limit $n2 $n3 10

@@ -4,6 +4,8 @@ import os
 
 settings = """
 
+set queuetype %(qtype)s
+
 #Open the NAM trace file
 set nf [open %(ttype)s-%(qtype)s.tr w]
 
