@@ -14,9 +14,10 @@ def main():
             for time,count in bytes_per_time.items():
                 times[time][file_name] = count
 
+    print "Throughput\tRED\tDropTail"
     for time,files in sorted(times.items(), key=lambda item: item[0]):
         row = ""
-        for file_name,count in sorted(files.items(), key=lambda item: item[0]):
+        for file_name,count in reversed(sorted(files.items(), key=lambda item: item[0])):
             row += "\t%s" % int(count / 1024)
         print "%s%s" % (time/10.0, row)
 

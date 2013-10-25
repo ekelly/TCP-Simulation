@@ -19,6 +19,7 @@ set tcp1 [new Agent/TCP/%(tcp2)s]
 """
 
 matches = [("Reno", "Reno"), ("Reno", "Newreno"), 
+            ("Newreno", "Newreno"),
            ("Vegas", "Vegas"), ("Newreno", "Vegas")]
 experiments = []
 

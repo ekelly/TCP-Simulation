@@ -1,5 +1,5 @@
 set style line 1 default
-set terminal png size 1000,400
+set terminal png size 400,400
 set output "droppedpacketsbycbr.png"
 set xlabel "CBR interference (in kb/sec)"
 set ylabel "% packets dropped"

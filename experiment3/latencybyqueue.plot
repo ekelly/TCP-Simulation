@@ -1,6 +1,8 @@
+set yrange [0:800]
+set datafile missing "?"
 set style line 1 default
 set terminal png size 1000,400
-set output "latency-".filename.".png"
+set output filename.".png"
 set xlabel "Time (s)"
 set ylabel "Latency (average RTT in ms)"
 #set xtics 1 font ",8"
