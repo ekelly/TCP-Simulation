@@ -3,9 +3,10 @@
 import os
 
 settings = """
+set udprate %(cbr)i
 
 #Open the NAM trace file
-set nf [open %(tcp1)s-%(tcp2)s.tr w]
+set nf [open %(tcp1)s-%(tcp2)s.%(cbr)i.tr w]
 
 #Create a simulator object
 set ns [new Simulator]
@@ -22,18 +23,21 @@ matches = [("Reno", "Reno"), ("Reno", "Newreno"),
 experiments = []
 
 for match in matches:
-    type1 = match[0].lower()
-    type2 = match[1].lower()
-    filename = "experiment.%s-%s.tcl" % (type1, type2)
-    with open(filename, "a+") as experiment:
-        experiment.write(settings % {"tcp1": match[0], "tcp2": match[1]})
-        with open("template.tcl") as template:
-            for line in template:
-                experiment.write(line)
-            experiment.close()
-            template.close()
-        experiments.append(filename)
+    for cbr in range(0, 10500, 500):
+        type1 = match[0].lower()
+        type2 = match[1].lower()
+        filename = "experiment.%s-%s.%i.tcl" % (type1, type2, cbr)
+        with open(filename, "a+") as experiment:
+            experiment.write(settings % {"tcp1": match[0], "tcp2": match[1], "cbr": cbr})
+            with open("template.tcl") as template:
+                for line in template:
+                    experiment.write(line)
+                experiment.close()
+                template.close()
+            experiments.append(filename)
 
 for experiment in experiments:
     os.system("ns %s" % experiment)
     os.remove(experiment)
+
+print ""

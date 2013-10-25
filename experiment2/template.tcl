@@ -1,5 +1,6 @@
 
-set udprate 5mb
+set kb kb
+set rate $udprate$kb
 
 #Define different colors for data flows (for NAM)
 $ns color 1 Blue
@@ -50,6 +51,7 @@ $ns duplex-link-op $n2 $n3 queuePos 0.5
 #       Setup a Constant Bit Rate flow         #
 ################################################
 
+if { $udprate != 0 } {
 # Setup N2
 set udp0 [new Agent/UDP]
 $ns attach-agent $n1 $udp0
@@ -68,6 +70,7 @@ $ns attach-agent $n2 $null0
 # Connect N2 to N3
 $ns connect $udp0 $null0
 $udp0 set fid_ 2
+}
 
 ################################################
 #          Setup the TCP connection            #
@@ -109,7 +112,9 @@ $ftp1 set type_ FTP
 ################################################
 
 #Schedule events for the CBR and TCP agents
+if { $udprate != 0 } {
 $ns at 0.0 "$cbr0 start"
+}
 $ns at 0.0 "$ftp0 start"
 $ns at 0.0 "$ftp1 start"
 
@@ -117,11 +122,10 @@ $ns at 0.0 "$ftp1 start"
 # $ns at 5.0 "$ns detach-agent $n0 $tcp0 ; $ns detach-agent $n3 $sink0"
 
 #Call the finish procedure after 5 seconds of simulation time
-$ns at 5.0 "finish"
+$ns at 10.0 "finish"
 
 #Print CBR packet size and interval
-puts "CBR packet size = [$cbr0 set packet_size_]"
-puts "CBR interval = [$cbr0 set interval_]"
+puts -nonewline "."
 
 #Run the simulation
 $ns run
