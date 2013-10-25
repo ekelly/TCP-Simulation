@@ -4,11 +4,11 @@ from optparse import OptionParser
 import os
 
 parser = OptionParser()
-parser.add_option("-s", "--start", dest="start", type="int", default=1,
+parser.add_option("-s", "--start", dest="start", type="int", default=5,
                           help="start at this mb/s for the UDP stream")
-parser.add_option("-e", "--end", dest="end", type="int", default=10,
+parser.add_option("-e", "--end", dest="end", type="int", default=100,
                           help="end at this mb/s for the UDP stream")
-parser.add_option("-i", "--increment", dest="inc", type="int", default=1,
+parser.add_option("-i", "--increment", dest="inc", type="int", default=5,
                           help="how fast do we increment the mb/s")
 
 (options, args) = parser.parse_args()
@@ -32,7 +32,7 @@ experiments = []
 
 if options.start and options.end and options.inc:
     for i in range(options.start, options.end + options.inc, options.inc):
-        i = i*1000
+        i = i*100
         for tcptype in ["TCP", "TCP/Reno", "TCP/Newreno", "TCP/Vegas"]:
             ttype = "tahoe" if tcptype.find("/") == -1 else tcptype.split("/")[1].lower()
             with open("experiment%s-%s.tcl" % (i, ttype), "a+") as experiment:
