@@ -21,7 +21,7 @@ proc finish {} {
         #Close the NAM trace file
         close $nf
         #Execute NAM on the trace file
-        exec nam out.nam &
+        # exec nam out.nam &
         exit 0
 }
 
@@ -58,6 +58,8 @@ $ns duplex-link-op $n2 $n3 queuePos 0.5
 #       Setup a Constant Bit Rate flow         #
 ################################################
 
+if { $udprate != 0 } {
+
 # Setup N2
 set udp0 [new Agent/UDP]
 $ns attach-agent $n1 $udp0
@@ -76,6 +78,8 @@ $ns attach-agent $n2 $null0
 # Connect N2 to N3
 $ns connect $udp0 $null0
 $udp0 set fid_ 2
+
+}
 
 ################################################
 #          Setup the TCP connection            #

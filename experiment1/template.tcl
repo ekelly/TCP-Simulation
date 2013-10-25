@@ -1,3 +1,7 @@
+
+set kb "kb"
+set rate $udprate$kb
+
 #Define different colors for data flows (for NAM)
 $ns color 1 Blue
 $ns color 2 Red
@@ -46,6 +50,8 @@ $ns duplex-link-op $n2 $n3 queuePos 0.5
 #       Setup a Constant Bit Rate flow         #
 ################################################
 
+if { $udprate != 0 } {
+
 # Setup N2
 set udp0 [new Agent/UDP]
 $ns attach-agent $n1 $udp0
@@ -54,7 +60,7 @@ set cbr0 [new Application/Traffic/CBR]
 $cbr0 attach-agent $udp0
 $cbr0 set type_ CBR
 $cbr0 set packet_size_ 1000
-$cbr0 set rate_ $udprate
+$cbr0 set rate_ $rate
 $cbr0 set random_ false
 
 # Setup N3
@@ -64,6 +70,8 @@ $ns attach-agent $n2 $null0
 # Connect N2 to N3
 $ns connect $udp0 $null0
 $udp0 set fid_ 2
+
+}
 
 ################################################
 #          Setup the TCP connection            #
@@ -87,7 +95,9 @@ $ftp0 set type_ FTP
 ################################################
 
 #Schedule events for the CBR and TCP agents
+if { $udprate != 0 } {
 $ns at 0.0 "$cbr0 start"
+}
 $ns at 0.0 "$ftp0 start"
 
 #Detach tcp and sink agents (not really necessary)
