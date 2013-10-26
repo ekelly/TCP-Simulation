@@ -1,5 +1,5 @@
 
-set udprate 5mb
+set udprate 7mb
 
 #Define different colors for data flows (for NAM)
 $ns color 1 Blue
@@ -91,13 +91,13 @@ $ftp0 set type_ FTP
 
 #Schedule events for the CBR and TCP agents
 $ns at 0.0 "$ftp0 start"
-$ns at 2.0 "$cbr0 start"
+$ns at 5.0 "$cbr0 start"
 
 #Detach tcp and sink agents (not really necessary)
 # $ns at 5.0 "$ns detach-agent $n0 $tcp0 ; $ns detach-agent $n3 $sink0"
 
 #Call the finish procedure after 5 seconds of simulation time
-$ns at 10.0 "finish"
+$ns at 20.0 "finish"
 
 #Print CBR packet size and interval
 puts -nonewline "."

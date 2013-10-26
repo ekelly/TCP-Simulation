@@ -1,5 +1,5 @@
 set style line 1 default
-set terminal png size 480,320
+set terminal pngcairo size 400,400
 set output "throughput-".filename.".png"
 set xlabel "CBR interference (in kb/sec)"
 set ylabel "Throughput (in kb/sec)"

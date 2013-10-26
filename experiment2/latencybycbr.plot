@@ -1,5 +1,5 @@
 set style line 1 default
-set terminal png size 1000,400
+set terminal pngcairo size 1000,400
 set output "latency-".filename.".png"
 set xlabel "CBR interference (in kb/sec)"
 set ylabel "Latency (average RTT in ms)"

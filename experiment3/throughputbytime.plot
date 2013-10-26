@@ -1,5 +1,5 @@
 set style line 1 default
-set terminal png size 1000,400
+set terminal pngcairo dashed size 1000,400
 set output filename.".png"
 set xlabel "Time (seconds)
 set ylabel "Throughput (in kb/sec)"

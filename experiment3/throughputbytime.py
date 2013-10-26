@@ -7,8 +7,8 @@ def main():
     times = defaultdict(dict)
     for file_name in sys.argv[1:]:
         with open(file_name) as in_file:
-            tcp_bytes_per_time = dict([(time,0) for time in range(0, 100)])
-            cbr_bytes_per_time = dict([(time,0) for time in range(0, 100)])
+            tcp_bytes_per_time = dict([(time,0) for time in range(0, 200)])
+            cbr_bytes_per_time = dict([(time,0) for time in range(0, 200)])
             for line in map(lambda line: line.split(" "), in_file):
                 if len(line) and line[0] == "r" and line[4] == "tcp" and line[2] == "2" and line[3] == "3":
                     tcp_bytes_per_time[int(float(line[1])*10)] += int(line[5])
